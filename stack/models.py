@@ -3,17 +3,23 @@ from stack.exceptions import StackOverFlowException, StackUnderFlowException
 MAX_SIZE = 40
 
 
+class Element(object):
+    def __init__(self, data, next_element):
+        self.data = data
+        self.next = next_element
+
+    def __str__(self):
+        return str(self.data)
+
+
 class Stack(object):
     size = 0
-
-    def __init__(self, top=None, next_element=None):
-        self.top = top
-        self.next = next_element
+    top = None
 
     def push(self, data):
         if self.full():
             raise StackOverFlowException()
-        self.top = Stack(data, self.top)
+        self.top = Element(data, self.top)
         self.size += 1
 
     def pop(self):
